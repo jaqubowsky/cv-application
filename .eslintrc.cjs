@@ -5,20 +5,15 @@ module.exports = {
   },
   extends: [
     "plugin:react/recommended",
+    "plugin:vitest/recommended",
     "airbnb",
     "prettier",
-    "plugin:jest/recommended",
   ],
   overrides: [],
   parserOptions: {
-    emaFeatures: {
-      jsx: true,
-    },
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "jest"],
-  rules: {
-    "react/state-in-constructor": [enabled, mode],
-  },
+  plugins: ["react", "vitest"],
+  rules: {},
 };

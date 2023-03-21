@@ -18,7 +18,7 @@ class EducationInfo extends PureComponent {
       "To",
     ];
 
-    const category = "educationInfo";
+    const CATEGORY = "educationInfo";
 
     const inputElement = Object.keys(cvData).map((data, idx) => {
       if (data === "id") return null;
@@ -34,7 +34,7 @@ class EducationInfo extends PureComponent {
           placeholder={placeholders[idx]}
           value={[cvData[data]]}
           key={data}
-          handleChange={(e) => handleChange(e, category, id)}
+          handleChange={(e) => handleChange(e, CATEGORY, id)}
         />
       );
     });
@@ -42,7 +42,10 @@ class EducationInfo extends PureComponent {
     return (
       <Flex gap="1em">
         {inputElement}
-        <Button handleClick={() => handleDeleteCategory(category, id)} text="Delete" />
+        <Button
+          handleClick={() => handleDeleteCategory(CATEGORY, id)}
+          text="Delete"
+        />
       </Flex>
     );
   }

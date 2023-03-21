@@ -17,6 +17,8 @@ class PersonalInfo extends PureComponent {
       "Description",
     ];
 
+    const CATEGORY = "personalInfo";
+
     const inputElement = Object.keys(cvData).map((data, idx) => {
       if (data === "id") return null;
       return (
@@ -26,7 +28,7 @@ class PersonalInfo extends PureComponent {
           placeholder={placeholders[idx]}
           value={[cvData[data]]}
           key={data}
-          handleChange={(e) => handleChange(e, "personalInfo", id)}
+          handleChange={(e) => handleChange(e, CATEGORY, id)}
         />
       );
     });

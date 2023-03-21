@@ -11,7 +11,7 @@ class ExperienceInfo extends PureComponent {
     // Didn't have clue how to handle this otherwise and I wanted to use map function...
     const placeholders = ["Position", "Company", "City", "From", "To"];
 
-    const category = "experienceInfo";
+    const CATEGORY = "experienceInfo";
 
     const inputElement = Object.keys(cvData).map((data, idx) => {
       if (data === "id") return null;
@@ -24,7 +24,7 @@ class ExperienceInfo extends PureComponent {
           placeholder={placeholders[idx]}
           value={[cvData[data]]}
           key={data}
-          handleChange={(e) => handleChange(e, category, id)}
+          handleChange={(e) => handleChange(e, CATEGORY, id)}
         />
       );
     });
@@ -33,7 +33,7 @@ class ExperienceInfo extends PureComponent {
       <Flex gap="1em">
         {inputElement}
         <Button
-          handleClick={() => handleDeleteCategory(category, id)}
+          handleClick={() => handleDeleteCategory(CATEGORY, id)}
           text="Delete"
         />
       </Flex>

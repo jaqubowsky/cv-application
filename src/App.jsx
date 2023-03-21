@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import uuid4 from "uuid4";
 import Header from "./components/Header";
 import Home from "./pages/home/Home";
+import Preview from "./pages/preview/Preview";
 import Wrapper from "./components/Wrapper";
 import cvData from "./utils/cvData";
 
@@ -79,7 +80,14 @@ class App extends PureComponent {
     return (
       <>
         <Header />
-        <Wrapper flexDirection="row" padding="2em" justifyContent="center">
+        <Wrapper
+          flexDirection="row"
+          padding="2em"
+          justifyContent="center"
+          position="relative"
+          alignItems="flex-start"
+          background={props => props.theme.colors.wrapperBg}
+        >
           <Home
             handleChange={this.onChange}
             cvData={this.state}
@@ -87,6 +95,7 @@ class App extends PureComponent {
             handleAddEducation={this.addEducation}
             handleDeleteCategory={this.deleteCategory}
           />
+          <Preview cvData={this.state}/>
         </Wrapper>
       </>
     );

@@ -1,10 +1,15 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { motion } from "framer-motion";
 
-const StyledButton = styled.button`
+const StyledButton = styled(motion.button)`
   background: ${(props) => props.theme.colors.header};
   color: ${(props) => props.color};
+  padding: 0.6em 0.4em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 `;
 
 class Button extends PureComponent {
@@ -12,7 +17,13 @@ class Button extends PureComponent {
     const { type, handleClick, color, text } = this.props;
 
     return (
-      <StyledButton type={type} color={color} onClick={handleClick}>
+      <StyledButton
+        type={type}
+        color={color}
+        onClick={handleClick}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 100 }}
+      >
         {text}
       </StyledButton>
     );

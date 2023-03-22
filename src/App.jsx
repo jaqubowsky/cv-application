@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import uuid4 from "uuid4";
 import Header from "./components/Header";
-import Home from "./pages/home/home";
+import Home from "./pages/home/Home";
 import Wrapper from "./components/Wrapper";
 import cvData from "./utils/cvData";
 
@@ -67,23 +67,11 @@ class App extends PureComponent {
     }));
   };
 
-  deleteEducation = (id) => {
+  deleteCategory = (category, id) => {
     this.setState((prevState) => {
-      const educationLeft = prevState.educationInfo.filter(
-        (data) => data.id !== id
-      );
+      const categoryLeft = prevState[category].filter((data) => data.id !== id);
 
-      return { ...prevState, educationInfo: [...educationLeft] };
-    });
-  };
-
-  deleteExperience = (id) => {
-    this.setState((prevState) => {
-      const experienceLeft = prevState.experienceInfo.filter(
-        (data) => data.id !== id
-      );
-
-      return { ...prevState, experienceInfo: [...experienceLeft] };
+      return { ...prevState, [category]: [...categoryLeft] };
     });
   };
 
@@ -97,8 +85,7 @@ class App extends PureComponent {
             cvData={this.state}
             handleAddExperience={this.addExperience}
             handleAddEducation={this.addEducation}
-            handleDeleteEducation={this.deleteEducation}
-            handleDeleteExperience={this.deleteExperience}
+            handleDeleteCategory={this.deleteCategory}
           />
         </Wrapper>
       </>

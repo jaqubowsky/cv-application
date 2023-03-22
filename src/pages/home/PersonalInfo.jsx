@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { PropTypes } from "prop-types";
-import uuid4 from "uuid4";
 import Input from "../../components/Input";
 import Flex from "../../components/Flex";
 
@@ -26,7 +25,7 @@ class PersonalInfo extends PureComponent {
           name={data}
           placeholder={placeholders[idx]}
           value={[cvData[data]]}
-          key={uuid4()}
+          key={data}
           handleChange={(e) => handleChange(e, "personalInfo", id)}
         />
       );

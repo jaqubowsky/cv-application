@@ -13,8 +13,7 @@ class Home extends PureComponent {
       handleChange,
       handleAddExperience,
       handleAddEducation,
-      handleDeleteEducation,
-      handleDeleteExperience,
+      handleDeleteCategory,
       cvData,
     } = this.props;
 
@@ -30,7 +29,7 @@ class Home extends PureComponent {
     const experienceInfoItem = cvData.experienceInfo.map((expItem) => (
       <ExperienceInfo
         handleChange={handleChange}
-        handleDeleteExperience={handleDeleteExperience}
+        handleDeleteCategory={handleDeleteCategory}
         cvData={expItem}
         id={expItem.id}
         key={expItem.id}
@@ -40,7 +39,7 @@ class Home extends PureComponent {
     const educationInfoItem = cvData.educationInfo.map((eduItem) => (
       <EducationInfo
         handleChange={handleChange}
-        handleDeleteEducation={handleDeleteEducation}
+        handleDeleteCategory={handleDeleteCategory}
         cvData={eduItem}
         id={eduItem.id}
         key={eduItem.id}
@@ -78,8 +77,7 @@ Home.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleAddEducation: PropTypes.func.isRequired,
   handleAddExperience: PropTypes.func.isRequired,
-  handleDeleteEducation: PropTypes.func.isRequired,
-  handleDeleteExperience: PropTypes.func.isRequired,
+  handleDeleteCategory: PropTypes.func.isRequired,
   cvData: PropTypes.shape({
     personalInfo: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))
       .isRequired,

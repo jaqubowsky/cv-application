@@ -1,16 +1,17 @@
 import React, { PureComponent } from "react";
 import { PropTypes } from "prop-types";
-import uuid4 from "uuid4";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Flex from "../../components/Flex";
 
 class ExperienceInfo extends PureComponent {
   render() {
-    const { handleChange, handleDeleteExperience, cvData, id } = this.props;
+    const { handleChange, handleDeleteCategory, cvData, id } = this.props;
 
     // Didn't have clue how to handle this otherwise and I wanted to use map function...
     const placeholders = ["Position", "Company", "City", "From", "To"];
+
+    const category = "experienceInfo";
 
     const inputElement = Object.keys(cvData).map((data, idx) => {
       if (data === "id") return null;
@@ -22,8 +23,8 @@ class ExperienceInfo extends PureComponent {
           name={data}
           placeholder={placeholders[idx]}
           value={[cvData[data]]}
-          key={uuid4()}
-          handleChange={(e) => handleChange(e, "experienceInfo", id)}
+          key={data}
+          handleChange={(e) => handleChange(e, category, id)}
         />
       );
     });
@@ -31,7 +32,10 @@ class ExperienceInfo extends PureComponent {
     return (
       <Flex gap="1em">
         {inputElement}
-        <Button handleClick={() => handleDeleteExperience(id)} text="Delete" />
+        <Button
+          handleClick={() => handleDeleteCategory(category, id)}
+          text="Delete"
+        />
       </Flex>
     );
   }
@@ -39,7 +43,7 @@ class ExperienceInfo extends PureComponent {
 
 ExperienceInfo.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  handleDeleteExperience: PropTypes.func.isRequired,
+  handleDeleteCategory: PropTypes.func.isRequired,
   cvData: PropTypes.objectOf(PropTypes.string).isRequired,
   id: PropTypes.string.isRequired,
 };

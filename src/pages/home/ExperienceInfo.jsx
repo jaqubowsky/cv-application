@@ -1,34 +1,47 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
+import { PropTypes } from "prop-types";
+import uuid4 from "uuid4";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-
-const StyledExperience = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-`;
+import Flex from "../../components/Flex";
 
 class ExperienceInfo extends PureComponent {
-  logIdiot = () => {
-    this.idiot = "idiot";
-
-    console.log(this.idiot);
-  };
-
   render() {
+    const { handleChange, handleDeleteExperience, cvData, id } = this.props;
+
+    // Didn't have clue how to handle this otherwise and I wanted to use map function...
+    const placeholders = ["Position", "Company", "City", "From", "To"];
+
+    const inputElement = Object.keys(cvData).map((data, idx) => {
+      if (data === "id") return null;
+      return (
+        <Input
+          type={
+            data === "employedTo" || data === "employedFrom" ? "number" : "text"
+          }
+          name={data}
+          placeholder={placeholders[idx]}
+          value={[cvData[data]]}
+          key={uuid4()}
+          handleChange={(e) => handleChange(e, "experienceInfo", id)}
+        />
+      );
+    });
+
     return (
-      <StyledExperience>
-        <h2>Experience</h2>
-        <Input type="text" name="position" placeholder="Position" />
-        <Input type="text" name="company" placeholder="Company" />
-        <Input type="text" name="city" placeholder="City" />
-        <Input type="number" name="employedFrom" placeholder="From" />
-        <Input type="text" name="employedTo" placeholder="To" />
-        <Button handleClick={this.logIdiot} text="Add" />
-      </StyledExperience>
+      <Flex gap="1em">
+        {inputElement}
+        <Button handleClick={() => handleDeleteExperience(id)} text="Delete" />
+      </Flex>
     );
   }
 }
+
+ExperienceInfo.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleDeleteExperience: PropTypes.func.isRequired,
+  cvData: PropTypes.objectOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
+};
 
 export default ExperienceInfo;

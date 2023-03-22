@@ -1,14 +1,19 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { PropTypes } from "prop-types";
+import { motion } from "framer-motion";
 
-const StyledInput = styled.input`
+const StyledInput = styled(motion.input)`
   width: 100%;
+  outline: hidden;
+  border: none;
+  border-radius: 7px;
+  padding: 0.4em;
 `;
 
 class Input extends PureComponent {
   render() {
-    const { type, name, placeholder } = this.props;
+    const { type, name, placeholder, handleChange, value } = this.props;
 
     return (
       <StyledInput
@@ -16,6 +21,10 @@ class Input extends PureComponent {
         name={name}
         aria-label={placeholder}
         placeholder={placeholder}
+        onChange={handleChange}
+        value={value}
+        whileTap={{ scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 100 }}
       />
     );
   }
@@ -23,8 +32,15 @@ class Input extends PureComponent {
 
 Input.propTypes = {
   type: PropTypes.string.isRequired,
+  handleChange: PropTypes.func,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  value: PropTypes.arrayOf(PropTypes.string),
+};
+
+Input.defaultProps = {
+  handleChange: () => {},
+  value: "",
 };
 
 export default Input;

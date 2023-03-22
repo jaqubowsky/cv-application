@@ -1,39 +1,57 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
+import { PropTypes } from "prop-types";
+import uuid4 from "uuid4";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-
-const StyledEducation = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-`;
+import Flex from "../../components/Flex";
 
 class EducationInfo extends PureComponent {
-  logIdiot = () => {
-    this.idiot = "idiot";
-
-    console.log(this.idiot);
-  };
-
   render() {
-    return (
-      <StyledEducation>
-        <h2>Experience</h2>
+    const { handleChange, handleDeleteEducation, cvData, id } = this.props;
+
+    // Didn't have clue how to handle this otherwise and I wanted to use map function...
+    const placeholders = [
+      "University Name",
+      "City",
+      "Degree",
+      "Subject",
+      "From",
+      "To",
+    ];
+
+    const inputElement = Object.keys(cvData).map((data, idx) => {
+      if (data === "id") return null;
+
+      return (
         <Input
-          type="text"
-          name="universityName"
-          placeholder="University Name"
+          type={
+            data === "educationFrom" || data === "educationTo"
+              ? "number"
+              : "text"
+          }
+          name={data}
+          placeholder={placeholders[idx]}
+          value={[cvData[data]]}
+          key={uuid4()}
+          handleChange={(e) => handleChange(e, "educationInfo", id)}
         />
-        <Input type="text" name="company" placeholder="City" />
-        <Input type="text" name="city" placeholder="Degree" />
-        <Input type="number" name="subject" placeholder="Subject" />
-        <Input type="text" name="educationFrom" placeholder="From" />
-        <Input type="text" name="educationTo" placeholder="To" />
-        <Button handleClick={this.logIdiot} text="Add" />
-      </StyledEducation>
+      );
+    });
+
+    return (
+      <Flex gap="1em">
+        {inputElement}
+        <Button handleClick={() => handleDeleteEducation(id)} text="Delete" />
+      </Flex>
     );
   }
 }
+
+EducationInfo.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleDeleteEducation: PropTypes.func.isRequired,
+  cvData: PropTypes.objectOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
+};
 
 export default EducationInfo;

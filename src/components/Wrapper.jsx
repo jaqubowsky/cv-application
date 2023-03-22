@@ -4,8 +4,9 @@ import styled from "styled-components";
 
 const StyledWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  max-width: ${(props) => props.width};
+  flex-direction: ${(props) => props.flexDirection};
+  justify-content: ${(props) => props.justifyContent};
+  width: ${(props) => props.width};
   padding: ${(props) => props.padding};
   gap: ${(props) => props.gap};
   background: ${(props) => props.background};
@@ -14,7 +15,16 @@ const StyledWrapper = styled.div`
   margin: 0 auto;
 `;
 
-function Wrapper({ children, width, padding, gap, background, shadow }) {
+function Wrapper({
+  children,
+  width,
+  justifyContent,
+  padding,
+  gap,
+  background,
+  flexDirection,
+  shadow,
+}) {
   return (
     <StyledWrapper
       width={width}
@@ -22,6 +32,8 @@ function Wrapper({ children, width, padding, gap, background, shadow }) {
       gap={gap}
       background={background}
       shadow={shadow}
+      justifyContent={justifyContent}
+      flexDirection={flexDirection}
     >
       {children}
     </StyledWrapper>
@@ -33,6 +45,8 @@ Wrapper.propTypes = {
   width: PropTypes.string,
   padding: PropTypes.string,
   gap: PropTypes.string,
+  justifyContent: PropTypes.string,
+  flexDirection: PropTypes.string,
   background: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   shadow: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
@@ -43,6 +57,8 @@ Wrapper.defaultProps = {
   gap: "0",
   background: "",
   shadow: "0",
+  justifyContent: "",
+  flexDirection: "column",
 };
 
 export default Wrapper;

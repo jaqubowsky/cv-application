@@ -1,21 +1,32 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, vi } from "vitest";
 import Theme from "../../styles/theme";
 import ExperienceInfo from "../../pages/home/ExperienceInfo";
 
 describe("Experience Info", () => {
+  const mockHandleChange = vi.fn();
+  const mockHandleDeleteCategory = vi.fn();
+  const mockCvData = {
+    position: "Dev",
+    company: "Acme Inc",
+    city: "New York ",
+    employedFrom: "2018",
+    employedTo: "2021",
+  };
+  const mockId = "1";
+
   test("renders correctly", () => {
     render(
       <Theme>
-        <ExperienceInfo />
+        <ExperienceInfo
+          cvData={mockCvData}
+          handleChange={mockHandleChange}
+          handleDeleteCategory={mockHandleDeleteCategory}
+          id={mockId}
+        />
       </Theme>
     );
-
-    const experienceInfoTitle = screen.getByRole("heading", {
-      level: 2,
-    });
-    expect(experienceInfoTitle).toBeInTheDocument();
 
     const experienceInfoPosition = screen.getByLabelText("Position");
     expect(experienceInfoPosition).toBeInTheDocument();
@@ -32,7 +43,9 @@ describe("Experience Info", () => {
     const experienceInfoEmployedTo = screen.getByLabelText("To");
     expect(experienceInfoEmployedTo).toBeInTheDocument();
 
-    const experienceInfoAddButton = screen.getByRole("button");
+    const experienceInfoAddButton = screen.getByRole("button", {
+      name: /delete/i,
+    });
     expect(experienceInfoAddButton).toBeInTheDocument();
   });
 });

@@ -15,5 +15,15 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react", "vitest"],
-  rules: {},
+  rules: {
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        labelComponents: ["FormLabel"],
+        labelAttributes: ["label"],
+        controlComponents: ["input"],
+        depth: 1,
+      },
+    ],
+  },
 };

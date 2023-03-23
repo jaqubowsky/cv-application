@@ -8,7 +8,7 @@ const theme = {
     header: "#252525",
     fontWhite: "#FFFFFF",
     fontDefault: "#333333",
-    mainBg: "#CCCCCC",
+    mainBg: "#cccccc87",
     wrapperBg: "#EEEEEE",
     wrapperShadow: `#00000059 0px 5px 15px  `,
   },

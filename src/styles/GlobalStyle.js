@@ -28,7 +28,7 @@ html, body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-family: ${(props) => props.theme.font.karla}
+  font-family: ${(props) => props.theme.font.karla};
 }
 /*
   6. Improve media defaults

@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { PropTypes } from "prop-types";
 import PersonalInfo from "./PersonalInfo";
 import ExperienceInfo from "./ExperienceInfo";
@@ -7,70 +7,68 @@ import Wrapper from "../../components/Wrapper";
 import Flex from "../../components/Flex";
 import Button from "../../components/Button";
 
-class Home extends PureComponent {
-  render() {
-    const {
-      handleChange,
-      handleAddExperience,
-      handleAddEducation,
-      handleDeleteCategory,
-      cvData,
-    } = this.props;
+function Home(props) {
+  const {
+    handleChange,
+    handleAddExperience,
+    handleAddEducation,
+    handleDeleteCategory,
+    cvData,
+  } = props;                                                    
 
-    const personalInfoItem = cvData.personalInfo.map((personalItem) => (
-      <PersonalInfo
-        handleChange={handleChange}
-        cvData={personalItem}
-        id={personalItem.id}
-        key={personalItem.id}
-      />
-    ));
+  const personalInfoItem = cvData.personalInfo.map((personalItem) => (
+    <PersonalInfo
+      handleChange={handleChange}
+      cvData={personalItem}
+      id={personalItem.id}
+      key={personalItem.id}
+    />
+  ));
 
-    const experienceInfoItem = cvData.experienceInfo.map((expItem) => (
-      <ExperienceInfo
-        handleChange={handleChange}
-        handleDeleteCategory={handleDeleteCategory}
-        cvData={expItem}
-        id={expItem.id}
-        key={expItem.id}
-      />
-    ));
+  const experienceInfoItem = cvData.experienceInfo.map((expItem) => (
+    <ExperienceInfo
+      handleChange={handleChange}
+      handleDeleteCategory={handleDeleteCategory}
+      cvData={expItem}
+      id={expItem.id}
+      key={expItem.id}
+    />
+  ));
 
-    const educationInfoItem = cvData.educationInfo.map((eduItem) => (
-      <EducationInfo
-        handleChange={handleChange}
-        handleDeleteCategory={handleDeleteCategory}
-        cvData={eduItem}
-        id={eduItem.id}
-        key={eduItem.id}
-      />
-    ));
+  const educationInfoItem = cvData.educationInfo.map((eduItem) => (
+    <EducationInfo
+      handleChange={handleChange}
+      handleDeleteCategory={handleDeleteCategory}
+      cvData={eduItem}
+      id={eduItem.id}
+      key={eduItem.id}
+    />
+  ));
 
-    return (
-      <Wrapper
-        padding="2em"
-        gap="3em"
-        width="45%"
-        background={(props) => props.theme.colors.wrapperBg}
-        shadow={(props) => props.theme.colors.wrapperShadow}
-      >
-        <Flex gap="1.2em">
-          <h2> Personal Information </h2>
-          {personalInfoItem}
-        </Flex>
-        <Flex gap="1.2em">
-          <h2> Experience </h2>
-          {experienceInfoItem}
-          <Button handleClick={handleAddExperience} text="Add" />
-        </Flex>
-        <Flex gap="1.2em">
-          <h2> Education </h2>
-          {educationInfoItem}
-          <Button handleClick={handleAddEducation} text="Add" />
-        </Flex>
-      </Wrapper>
-    );
-  }
+  return (
+    <Wrapper
+      padding="2em"
+      gap="3em"
+      width="45%"
+      background={(props) => props.theme.colors.wrapperBg}
+      shadow={(props) => props.theme.colors.wrapperShadow}
+    >
+      <Flex gap="1.2em">
+        <h2> Personal Information </h2>
+        {personalInfoItem}
+      </Flex>
+      <Flex gap="1.2em">
+        <h2> Experience </h2>
+        {experienceInfoItem}
+        <Button handleClick={handleAddExperience} text="Add" />
+      </Flex>
+      <Flex gap="1.2em">
+        <h2> Education </h2>
+        {educationInfoItem}
+        <Button handleClick={handleAddEducation} text="Add" />
+      </Flex>
+    </Wrapper>
+  );
 }
 
 Home.propTypes = {

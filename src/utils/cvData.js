@@ -1,6 +1,6 @@
 import uuid4 from "uuid4";
 
-const cvData = {
+const cvDataEmpty = {
   personalInfo: [
     {
       firstName: "",
@@ -35,4 +35,4 @@ const cvData = {
   ],
 };
 
-export default cvData;
+export default cvDataEmpty;

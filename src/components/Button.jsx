@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
@@ -12,22 +12,20 @@ const StyledButton = styled(motion.button)`
   cursor: pointer;
 `;
 
-class Button extends PureComponent {
-  render() {
-    const { type, handleClick, color, text } = this.props;
+function Button(props) {
+  const { type, handleClick, color, text } = props;
 
-    return (
-      <StyledButton
-        type={type}
-        color={color}
-        onClick={handleClick}
-        whileTap={{ scale: 0.9 }}
-        transition={{ type: "spring", stiffness: 100 }}
-      >
-        {text}
-      </StyledButton>
-    );
-  }
+  return (
+    <StyledButton
+      type={type}
+      color={color}
+      onClick={handleClick}
+      whileTap={{ scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 100 }}
+    >
+      {text}
+    </StyledButton>
+  );
 }
 
 Button.propTypes = {

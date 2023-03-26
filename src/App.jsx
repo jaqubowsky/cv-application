@@ -1,23 +1,19 @@
-import React, { PureComponent } from "react";
+import React, { useState } from "react";
 import uuid4 from "uuid4";
 import Header from "./components/Header";
 import Home from "./pages/home/Home";
 import Preview from "./pages/preview/Preview";
 import Wrapper from "./components/Wrapper";
-import cvData from "./utils/cvData";
+import cvDataEmpty from "./utils/cvData";
 
-class App extends PureComponent {
-  constructor() {
-    super();
+function App() {
+  const [cvData, setCvData] = useState(cvDataEmpty);
 
-    this.state = cvData;
-  }
-
-  onChange = (e, category, id) => {
+  const onChange = (e, category, id) => {
     const { name, value } = e.target;
 
-    this.setState((prevState) => {
-      const newExperienceInfo = prevState[category].map((expItem) => {
+    setCvData((prevState) => {
+      const newInfo = prevState[category].map((expItem) => {
         if (expItem.id === id) {
           return {
             ...expItem,
@@ -28,13 +24,14 @@ class App extends PureComponent {
       });
 
       return {
-        [category]: newExperienceInfo,
+        ...prevState,
+        [category]: newInfo,
       };
     });
   };
 
-  addExperience = () => {
-    this.setState((prevState) => ({
+  const addExperience = () => {
+    setCvData((prevState) => ({
       ...prevState,
       experienceInfo: [
         ...prevState.experienceInfo,
@@ -50,8 +47,8 @@ class App extends PureComponent {
     }));
   };
 
-  addEducation = () => {
-    this.setState((prevState) => ({
+  const addEducation = () => {
+    setCvData((prevState) => ({
       ...prevState,
       educationInfo: [
         ...prevState.educationInfo,
@@ -68,38 +65,36 @@ class App extends PureComponent {
     }));
   };
 
-  deleteCategory = (category, id) => {
-    this.setState((prevState) => {
+  const deleteCategory = (category, id) => {
+    setCvData((prevState) => {
       const categoryLeft = prevState[category].filter((data) => data.id !== id);
 
       return { ...prevState, [category]: [...categoryLeft] };
     });
   };
 
-  render() {
-    return (
-      <>
-        <Header />
-        <Wrapper
-          flexDirection="row"
-          padding="2em"
-          justifyContent="center"
-          position="relative"
-          alignItems="flex-start"
-          background={props => props.theme.colors.wrapperBg}
-        >
-          <Home
-            handleChange={this.onChange}
-            cvData={this.state}
-            handleAddExperience={this.addExperience}
-            handleAddEducation={this.addEducation}
-            handleDeleteCategory={this.deleteCategory}
-          />
-          <Preview cvData={this.state}/>
-        </Wrapper>
-      </>
-    );
-  }
+  return (
+    <>
+      <Header />
+      <Wrapper
+        flexDirection="row"
+        padding="2em"
+        justifyContent="center"
+        position="relative"
+        alignItems="flex-start"
+        background={(props) => props.theme.colors.wrapperBg}
+      >
+        <Home
+          handleChange={onChange}
+          cvData={cvData}
+          handleAddExperience={addExperience}
+          handleAddEducation={addEducation}
+          handleDeleteCategory={deleteCategory}
+        />
+        <Preview cvData={cvData} />
+      </Wrapper>
+    </>
+  );
 }
 
 export default App;

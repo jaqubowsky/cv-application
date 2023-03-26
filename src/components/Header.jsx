@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import styled from "styled-components";
 import Wrapper from "./Wrapper";
 
@@ -9,16 +9,14 @@ const StyledHeader = styled.header`
   font-size: 1.3rem;
 `;
 
-class Header extends PureComponent {
-  render() {
-    return (
-      <StyledHeader>
-        <Wrapper width="90%">
-          <h1>CV CREATOR</h1>
-        </Wrapper>
-      </StyledHeader>
-    );
-  }
+function Header() {
+  return (
+    <StyledHeader>
+      <Wrapper width="90%">
+        <h1>CV CREATOR</h1>
+      </Wrapper>
+    </StyledHeader>
+  );
 }
 
 export default Header;

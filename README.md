@@ -50,7 +50,7 @@
 ## About The Project
 
 <div align="center">
-  <a href="https://github.com/jaqubowsky/cv-application/">
+  <a href="https://inquisitive-eclair-4ece3a.netlify.app">
     <img src="public/app-preview.png" alt="resume builder app preview">
   </a>
   
